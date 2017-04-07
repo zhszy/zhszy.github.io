@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhszy.github.io/blog">
-  <title>Archives: 2014 | zhs的博客</title>
+  <title>Private Pods | zhs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ioser 正在探索开发之路">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhs的博客">
-<meta property="og:url" content="https://zhszy.github.io/blog/archives/2014/index.html">
+  <meta name="description" content="Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。 1.创建并设置一个私有的Spec Repo。 创建完成之后在Terminal中执行如下命令: # pod repo add [REPO_NAME] [SOURCE_URL] PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Private Pods">
+<meta property="og:url" content="https://zhszy.github.io/blog/2014/07/20/cocoapods/index.html">
 <meta property="og:site_name" content="zhs的博客">
-<meta property="og:description" content="ioser 正在探索开发之路">
+<meta property="og:description" content="Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。 1.创建并设置一个私有的Spec Repo。 创建完成之后在Terminal中执行如下命令: # pod repo add [REPO_NAME] [SOURCE_URL] PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有">
+<meta property="og:updated_time" content="2017-04-07T08:47:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhs的博客">
-<meta name="twitter:description" content="ioser 正在探索开发之路">
+<meta name="twitter:title" content="Private Pods">
+<meta name="twitter:description" content="Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。 1.创建并设置一个私有的Spec Repo。 创建完成之后在Terminal中执行如下命令: # pod repo add [REPO_NAME] [SOURCE_URL] PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有">
   
     <link rel="alternative" href="/atom.xml" title="zhs的博客" type="application/atom+xml">
   
@@ -128,49 +130,171 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="[layout]-cocoapods" class="article article-type-[layout] " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2014" class="archive-year">2014</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-[layout]">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2014/07/20/cocoapods/" class="archive-article-date">
-  	<time datetime="2014-07-20T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-07-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2014/07/20/cocoapods/">Private Pods</a>
+    <h1 class="article-title" itemprop="name">
+      Private Pods
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/blog/2014/07/20/cocoapods/" class="archive-article-date">
+  	<time datetime="2014-07-20T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。</p>
+<p>1.创建并设置一个私有的Spec Repo。</p>
+<p>创建完成之后在Terminal中执行如下命令:</p>
+<pre><code># pod repo add [REPO_NAME] [SOURCE_URL]
+PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有Spec Repo的话在他有对应Git仓库的权限的前提下执行相同的命令添加这个Spec Repo即可。
+</code></pre><p>如果删除在Terminal中执行如下命令:</p>
+<pre><code># pod repo remove [REPO_NAME] 
+</code></pre><p>2.创建Pod的所需要的项目工程文件。</p>
+<pre><code>$ pod lib create [POD_NAME]
+</code></pre><ul>
+<li>When you’re asked what language you want to use, answer Swift.</li>
+<li>When asked if you’d like to include a demo application, answer Yes.</li>
+<li>When determining whether to create a sample project or not, the CocoaPods team suggests asking yourself “Should this Pod include a screenshot?” If so, then it’s a good idea to include a sample project.</li>
+<li>When asked which testing framework to use, answer None.</li>
+<li>Answer No to the prompt regarding view based testing.。</li>
+</ul>
+<p>3.编辑对应的podspec文件。</p>
+<ul>
+<li><p>编辑完podspec文件后，需要验证一下这个文件是否可用，如果有任何WARNING或者ERROR都是不可以的，它就不能被添加到Spec Repo中，不过xcode的WARNING是可以存在的，验证需要执行一下命令</p>
+<p>创建完成之后在Terminal中执行如下命令:</p>
+<p>$ pod lib lint</p>
+<p>当出现:</p>
+<p>-&gt; [POD_NAME] (version)<br>PodTestLibrary passed validation.<br>ps:POD_NAME为项目工程名</p>
+<p>时，说明验证通过了。</p>
+</li>
+</ul>
+<p>4.向私有的Spec Repo中提交podspec。<br>  更新创建版本:</p>
+<pre><code>git tag &apos;1.0.0&apos;
+git push --tags
+PS：当前的版本号必须和.podspec文件中的版本匹配
+</code></pre><p>  提交podspec</p>
+<pre><code>pod repo push [REPO_NAME] [POD_NAME].podspec
+</code></pre><p>5.更新维护podspec。</p>
+<p>更新提交新版本重复实现步骤3和步骤4。</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhszy.github.io/blog/2014/07/20/cocoapods/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/blog/2015/10/12/gaode/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Private Pods</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -193,8 +317,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -51,16 +51,12 @@
 		  <h1 class="header-author"><a href="/">zhs</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">ios 个人见解，仅供参考</p>
+		<p class="header-subtitle">人生如梦亦如幻</p>
 		
 
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/blog/">主页</a></li>
-	        
-				<li><a href="/blog/essays/">随笔</a></li>
-	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -81,8 +77,6 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/zhszy" title="github"><i class="icon-github"></i></a>
-		        
 			</div>
 		</nav>
 	</header>		
@@ -105,21 +99,15 @@
 			  <h1 class="header-author js-header-author">zhs</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>ios 个人见解，仅供参考<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>人生如梦亦如幻<i class="icon icon-quo-right"></i></p>
 			
 			
-			
-				
-			
-				
 			
 			
 			
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/zhszy" title="github"><i class="icon-github"></i></a>
-			        
 				</div>
 			</nav>
 
@@ -127,10 +115,6 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/blog/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/blog/essays/">随笔</a></li>
-		        
 				</ul>
 			</nav>
 		</header>				
@@ -198,27 +182,61 @@
 
 
   
-    <article id="[layout]-高德" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
+    <article id="[layout]-gaode" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2015/10/07/高德/">高德</a>
+      <a class="article-title" href="/blog/2015/10/12/gaode/">Private Pods</a>
     </h1>
   
 
         
-        <a href="/blog/2015/10/07/高德/" class="archive-article-date">
-  	<time datetime="2015-10-07T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-07</time>
+        <a href="/blog/2015/10/12/gaode/" class="archive-article-date">
+  	<time datetime="2015-10-12T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。</p>
+<p>1.创建并设置一个私有的Spec Repo。</p>
+<p>创建完成之后在Terminal中执行如下命令:</p>
+<pre><code># pod repo add [REPO_NAME] [SOURCE_URL]
+PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有Spec Repo的话在他有对应Git仓库的权限的前提下执行相同的命令添加这个Spec Repo即可。
+</code></pre><p>如果删除在Terminal中执行如下命令:</p>
+<pre><code># pod repo remove [REPO_NAME] 
+</code></pre><p>2.创建Pod的所需要的项目工程文件。</p>
+<pre><code>$ pod lib create [POD_NAME]
+</code></pre><ul>
+<li>When you’re asked what language you want to use, answer Swift.</li>
+<li>When asked if you’d like to include a demo application, answer Yes.</li>
+<li>When determining whether to create a sample project or not, the CocoaPods team suggests asking yourself “Should this Pod include a screenshot?” If so, then it’s a good idea to include a sample project.</li>
+<li>When asked which testing framework to use, answer None.</li>
+<li>Answer No to the prompt regarding view based testing.。</li>
+</ul>
+<p>3.编辑对应的podspec文件。</p>
+<ul>
+<li><p>编辑完podspec文件后，需要验证一下这个文件是否可用，如果有任何WARNING或者ERROR都是不可以的，它就不能被添加到Spec Repo中，不过xcode的WARNING是可以存在的，验证需要执行一下命令</p>
+<p>创建完成之后在Terminal中执行如下命令:</p>
+<p>$ pod lib lint</p>
+<p>当出现:</p>
+<p>-&gt; [POD_NAME] (version)<br>PodTestLibrary passed validation.<br>ps:POD_NAME为项目工程名</p>
+<p>时，说明验证通过了。</p>
+</li>
+</ul>
+<p>4.向私有的Spec Repo中提交podspec。<br>  更新创建版本:</p>
+<pre><code>git tag &apos;1.0.0&apos;
+git push --tags
+PS：当前的版本号必须和.podspec文件中的版本匹配
+</code></pre><p>  提交podspec</p>
+<pre><code>pod repo push [REPO_NAME] [POD_NAME].podspec
+</code></pre><p>5.更新维护podspec。</p>
+<p>更新提交新版本重复实现步骤3和步骤4。</p>
+
       
 
       
@@ -230,7 +248,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2015/10/07/高德/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2015/10/12/gaode/">展开全文 >></a>
         </p>
       
 
@@ -255,20 +273,54 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2014/07/17/cocoapods/">cocoapods</a>
+      <a class="article-title" href="/blog/2014/07/20/cocoapods/">Private Pods</a>
     </h1>
   
 
         
-        <a href="/blog/2014/07/17/cocoapods/" class="archive-article-date">
-  	<time datetime="2014-07-17T07:13:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-07-17</time>
+        <a href="/blog/2014/07/20/cocoapods/" class="archive-article-date">
+  	<time datetime="2014-07-20T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-07-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。</p>
+<p>1.创建并设置一个私有的Spec Repo。</p>
+<p>创建完成之后在Terminal中执行如下命令:</p>
+<pre><code># pod repo add [REPO_NAME] [SOURCE_URL]
+PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有Spec Repo的话在他有对应Git仓库的权限的前提下执行相同的命令添加这个Spec Repo即可。
+</code></pre><p>如果删除在Terminal中执行如下命令:</p>
+<pre><code># pod repo remove [REPO_NAME] 
+</code></pre><p>2.创建Pod的所需要的项目工程文件。</p>
+<pre><code>$ pod lib create [POD_NAME]
+</code></pre><ul>
+<li>When you’re asked what language you want to use, answer Swift.</li>
+<li>When asked if you’d like to include a demo application, answer Yes.</li>
+<li>When determining whether to create a sample project or not, the CocoaPods team suggests asking yourself “Should this Pod include a screenshot?” If so, then it’s a good idea to include a sample project.</li>
+<li>When asked which testing framework to use, answer None.</li>
+<li>Answer No to the prompt regarding view based testing.。</li>
+</ul>
+<p>3.编辑对应的podspec文件。</p>
+<ul>
+<li><p>编辑完podspec文件后，需要验证一下这个文件是否可用，如果有任何WARNING或者ERROR都是不可以的，它就不能被添加到Spec Repo中，不过xcode的WARNING是可以存在的，验证需要执行一下命令</p>
+<p>创建完成之后在Terminal中执行如下命令:</p>
+<p>$ pod lib lint</p>
+<p>当出现:</p>
+<p>-&gt; [POD_NAME] (version)<br>PodTestLibrary passed validation.<br>ps:POD_NAME为项目工程名</p>
+<p>时，说明验证通过了。</p>
+</li>
+</ul>
+<p>4.向私有的Spec Repo中提交podspec。<br>  更新创建版本:</p>
+<pre><code>git tag &apos;1.0.0&apos;
+git push --tags
+PS：当前的版本号必须和.podspec文件中的版本匹配
+</code></pre><p>  提交podspec</p>
+<pre><code>pod repo push [REPO_NAME] [POD_NAME].podspec
+</code></pre><p>5.更新维护podspec。</p>
+<p>更新提交新版本重复实现步骤3和步骤4。</p>
+
       
 
       
@@ -280,7 +332,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2014/07/17/cocoapods/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2014/07/20/cocoapods/">展开全文 >></a>
         </p>
       
 
