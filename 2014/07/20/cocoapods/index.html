@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://zhszy.github.io/2014/07/20/cocoapods/index.html">
 <meta property="og:site_name" content="zhs的博客">
 <meta property="og:description" content="Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。 1.创建并设置一个私有的Spec Repo。 创建完成之后在Terminal中执行如下命令: # pod repo add [REPO_NAME] [SOURCE_URL] PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有">
-<meta property="og:updated_time" content="2017-04-10T06:29:25.000Z">
+<meta property="og:updated_time" content="2017-04-10T06:57:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Private Pods">
 <meta name="twitter:description" content="Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。 1.创建并设置一个私有的Spec Repo。 创建完成之后在Terminal中执行如下命令: # pod repo add [REPO_NAME] [SOURCE_URL] PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有">
@@ -167,15 +167,14 @@ PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私�
 <li>Answer No to the prompt regarding view based testing.。</li>
 </ul>
 <p>3.编辑对应的podspec文件。</p>
-<ul>
-<li><p>编辑完podspec文件后，需要验证一下这个文件是否可用，如果有任何WARNING或者ERROR都是不可以的，它就不能被添加到Spec Repo中，不过xcode的WARNING是可以存在的，验证需要执行一下命令</p>
-<p>创建完成之后在Terminal中执行如下命令:</p>
-<p>$ pod lib lint</p>
-<p>当出现:</p>
-<p>-&gt; [POD_NAME] (version)<br>PodTestLibrary passed validation.<br>ps:POD_NAME为项目工程名</p>
-<p>时，说明验证通过了。</p>
-</li>
-</ul>
+<p>  编辑完podspec文件后，需要验证一下这个文件是否可用，如果有任何WARNING或者ERROR都是不可以的，它就不能被添加到Spec Repo中，不过xcode的WARNING是可以存在的，验证需要执行一下命令</p>
+<p>  创建完成之后在Terminal中执行如下命令:</p>
+<pre><code>$ pod lib lint
+</code></pre><p> 当出现:</p>
+<pre><code>-&gt; [POD_NAME] (version)
+PodTestLibrary passed validation.
+ps:POD_NAME为项目工程名
+</code></pre><p> 时，说明验证通过了。</p>
 <p>4.向私有的Spec Repo中提交podspec。<br>  更新创建版本:</p>
 <pre><code>git tag &apos;1.0.0&apos;
 git push --tags
@@ -257,7 +256,7 @@ PS：当前的版本号必须和.podspec文件中的版本匹配
 <nav id="article-nav">
   
   
-    <a href="/2015/04/12/packaging/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2014/12/08/dataLinking/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">iOS自动化打包</div>
       <i class="icon-circle-right"></i>
     </a>
