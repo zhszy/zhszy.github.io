@@ -15,12 +15,13 @@
 <meta property="og:url" content="https://zhszy.github.io/2015/04/12/packaging/index.html">
 <meta property="og:site_name" content="zhs的博客">
 <meta property="og:description" content="需要工具 Xcode SourceTree 打包分为两种情况，STG环境，PRD环境，可以根据项目进项相关配置 PS：打包时需要保证SourceTree无可提交代码并拉取最新代码。 1.使用终端进入SourceTree对应的项目文件（.xcodeproj所在的目录文件）； 2.输入如下命令： xcodebuild -workspace [POD_NAME].xcworkspace -scheme">
-<meta property="og:image" content="https://zhszy.github.io/Users/zhs/Desktop/blog/public/img/package/25ED6929-B612-4C83-B9E9-201330328010.png">
-<meta property="og:updated_time" content="2017-04-10T05:16:55.000Z">
+<meta property="og:image" content="https://zhszy.github.io/Users/zhs/Desktop/blog/public/img/package/25ED6929-B612-4C83-B9E9-201330328010.png%20=626x254">
+<meta property="og:image" content="https://zhszy.github.io/Users/zhs/Desktop/blog/public/img/package/WX20170410-135131.png%20=626x254">
+<meta property="og:updated_time" content="2017-04-10T05:59:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化打包">
 <meta name="twitter:description" content="需要工具 Xcode SourceTree 打包分为两种情况，STG环境，PRD环境，可以根据项目进项相关配置 PS：打包时需要保证SourceTree无可提交代码并拉取最新代码。 1.使用终端进入SourceTree对应的项目文件（.xcodeproj所在的目录文件）； 2.输入如下命令： xcodebuild -workspace [POD_NAME].xcworkspace -scheme">
-<meta name="twitter:image" content="https://zhszy.github.io/Users/zhs/Desktop/blog/public/img/package/25ED6929-B612-4C83-B9E9-201330328010.png">
+<meta name="twitter:image" content="https://zhszy.github.io/Users/zhs/Desktop/blog/public/img/package/25ED6929-B612-4C83-B9E9-201330328010.png%20=626x254">
   
     <link rel="alternative" href="/atom.xml" title="zhs的博客" type="application/atom+xml">
   
@@ -159,11 +160,17 @@
 <pre><code>xcodebuild -workspace [POD_NAME].xcworkspace -scheme [POD_NAME] -configuration Release
 ps:[POD_NAME]为项目名称
 </code></pre><p>如果打包成功了如下图所示：</p>
-<p><img src="/Users/zhs/Desktop/blog/public/img/package/25ED6929-B612-4C83-B9E9-201330328010.png" alt=""><br>3.复制下图中蓝色选中区域的路径： </p>
+<p><img src="/Users/zhs/Desktop/blog/public/img/package/25ED6929-B612-4C83-B9E9-201330328010.png =626x254" alt=""></p>
+<p>3.复制下图中蓝色选中区域的路径：</p>
+<p><img src="/Users/zhs/Desktop/blog/public/img/package/WX20170410-135131.png =626x254" alt=""></p>
 <p>4.执行如下命令：</p>
-<pre><code>xcrun -sdk iphoneos -v PackageApplication 刚才复制的蓝色选中的路径 -o ~/Desktop/SIAPP.ipa
-</code></pre><p>5.执行如下命令：  </p>
+<pre><code>xcrun -sdk iphoneos -v PackageApplication 刚才复制的蓝色选中的路径 -o ~/Desktop/[POD_NAME].ipa
 
+ps:命令成功后会在桌面生成.ipa包
+</code></pre><p>5.删除多余的ipa文件： </p>
+<pre><code>执行如下命令：
+rm -rf 蓝色选中的路径
+</code></pre>
       
 
       
