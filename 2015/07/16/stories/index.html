@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhszy.github.io">
-  <title>Archives: 2015 | zhs的博客</title>
+  <title>Private Pods | zhs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ioser 正在探索开发之路">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhs的博客">
-<meta property="og:url" content="https://zhszy.github.io/archives/2015/index.html">
+  <meta name="description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];   若视图中是多个手势，该方法不适用">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Private Pods">
+<meta property="og:url" content="https://zhszy.github.io/2015/07/16/stories/index.html">
 <meta property="og:site_name" content="zhs的博客">
-<meta property="og:description" content="ioser 正在探索开发之路">
+<meta property="og:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];   若视图中是多个手势，该方法不适用">
+<meta property="og:updated_time" content="2017-04-11T10:43:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhs的博客">
-<meta name="twitter:description" content="ioser 正在探索开发之路">
+<meta name="twitter:title" content="Private Pods">
+<meta name="twitter:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];   若视图中是多个手势，该方法不适用">
   
     <link rel="alternative" href="/atom.xml" title="zhs的博客" type="application/atom+xml">
   
@@ -128,76 +130,123 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="[layout]-stories" class="article article-type-[layout] " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Private Pods
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-[layout]">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/07/16/stories/" class="archive-article-date">
+
+        
+        <a href="/2015/07/16/stories/" class="archive-article-date">
   	<time datetime="2015-07-16T10:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-16</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/07/16/stories/">Private Pods</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-多事件同时响应"><a href="#1-多事件同时响应" class="headerlink" title="1.多事件同时响应"></a>1.多事件同时响应</h2><blockquote>
+<p> 当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];<br>   若视图中是多个手势，该方法不适用</p>
+</blockquote>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhszy.github.io/2015/07/16/stories/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-[layout]">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/04/12/packaging/" class="archive-article-date">
-  	<time datetime="2015-04-12T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-04-12</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/12/packaging/">iOS自动化打包</a>
-    </h1>
+    <a href="/2015/04/12/packaging/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS自动化打包
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -220,8 +269,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
