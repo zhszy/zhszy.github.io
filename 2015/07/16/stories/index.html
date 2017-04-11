@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhszy.github.io">
-  <title>Private Pods | zhs的博客</title>
+  <title>iOS常用tip | zhs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];   若视图中是多个手势，该方法不适用">
+  <meta name="description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];  若视图中是多个手势，该方法不适用 2.生成ss">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Private Pods">
+<meta property="og:title" content="iOS常用tip">
 <meta property="og:url" content="https://zhszy.github.io/2015/07/16/stories/index.html">
 <meta property="og:site_name" content="zhs的博客">
-<meta property="og:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];   若视图中是多个手势，该方法不适用">
-<meta property="og:updated_time" content="2017-04-11T10:43:50.000Z">
+<meta property="og:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];  若视图中是多个手势，该方法不适用 2.生成ss">
+<meta property="og:updated_time" content="2017-04-11T10:55:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Private Pods">
-<meta name="twitter:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];   若视图中是多个手势，该方法不适用">
+<meta name="twitter:title" content="iOS常用tip">
+<meta name="twitter:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];  若视图中是多个手势，该方法不适用 2.生成ss">
   
     <link rel="alternative" href="/atom.xml" title="zhs的博客" type="application/atom+xml">
   
@@ -137,7 +137,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Private Pods
+      iOS常用tip
     </h1>
   
 
@@ -151,9 +151,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-多事件同时响应"><a href="#1-多事件同时响应" class="headerlink" title="1.多事件同时响应"></a>1.多事件同时响应</h2><blockquote>
-<p> 当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];<br>   若视图中是多个手势，该方法不适用</p>
+<p> 当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];</p>
 </blockquote>
-
+<pre><code>若视图中是多个手势，该方法不适用
+</code></pre><h2 id="2-生成ssh密钥"><a href="#2-生成ssh密钥" class="headerlink" title="2.生成ssh密钥"></a>2.生成ssh密钥</h2><p> 生成新的ssh秘钥</p>
+<pre><code>$ ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱”
+</code></pre><p> 查看生成的秘钥</p>
+<pre><code>cat ~/.ssh/id_rsa.pub
+</code></pre><p> 检查SSH keys是否存在</p>
+<pre><code>ls -al ~/.ssh
+</code></pre>
       
 
       
