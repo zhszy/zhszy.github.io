@@ -177,6 +177,14 @@
 </li>
 </ol>
 <p>当然，两种方式都需要计算duration。</p>
+<h2 id="5-iOS-7后隐藏UITextField的光标"><a href="#5-iOS-7后隐藏UITextField的光标" class="headerlink" title="5. iOS 7后隐藏UITextField的光标"></a>5. iOS 7后隐藏UITextField的光标</h2><p>隐藏UITextField的光标一样，就简单的一句话：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">textFiled.tintColor = [UIColor clearColor];</div></pre></td></tr></table></figure>
+<p>通常我们用UIPickerView作为我们的UITextField的inputView时，我们是需要隐藏光标的。当然，如果想换个光标颜色，也是这么处理。</p>
+<blockquote>
+<p>这么处理的有个遗留问题是：通常我们使用UIPickerView作为UITextField的inputView时， 并不希望去执行各种菜单操作(全选、复制、粘帖)，但只是去设置UITextField的tintColor时，我们仍然可以执行这边操作，所以需要加额外的处理。这个问题，我们可以这样处理：在textFieldShouldBeginEditing:中，我们把UITextField的userInteractionEnabled设置为NO，然后在textFieldShouldEndEditing:，将将这个值设置回来。如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField &#123;</div><div class="line">    textField.userInteractionEnabled = NO;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line">- (BOOL)textFieldShouldEndEditing:(UITextField *)textField &#123;</div><div class="line">    textField.userInteractionEnabled = YES;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就OK了。当然这只是我们当前使用的一种处理方式，还有其它的方法，直接google或者stackoverflow吧。</p>
 
       
 
