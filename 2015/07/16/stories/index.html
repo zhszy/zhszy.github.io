@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://zhszy.github.io/2015/07/16/stories/index.html">
 <meta property="og:site_name" content="zhs的博客">
 <meta property="og:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];  若视图中是多个手势，该方法不适用 2.生成ss">
-<meta property="og:updated_time" content="2017-04-11T10:55:47.000Z">
+<meta property="og:updated_time" content="2017-04-12T06:00:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常用tip">
 <meta name="twitter:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];  若视图中是多个手势，该方法不适用 2.生成ss">
@@ -160,7 +160,24 @@
 <pre><code>cat ~/.ssh/id_rsa.pub
 </code></pre><p> 检查SSH keys是否存在</p>
 <pre><code>ls -al ~/.ssh
-</code></pre>
+</code></pre><h2 id="3-URL转义"><a href="#3-URL转义" class="headerlink" title="3.URL转义"></a>3.URL转义</h2><ul>
+<li><p>在使用+URLWithString:或-initWithString:来创建一个URL对象时，提供的参数字符串必须符合RFC 2396标准Uniform Resource Identifiers (URI): Generic Syntax。而这两个方法又是根据RFC 1738 Uniform Resource Locators (URL)和1808 Relative Uniform Resource Locators两个标准来解析字符串的。可以参考一下<a href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html" target="_blank" rel="external">阮大侠的URL编码</a>。</p>
+</li>
+<li><p>我们所需要做的就是对不符合标准的字符串进行转义操作。NSString类提供了两个方法来做这种转义操作，一个是-stringByAddingPercentEscapesUsingEncoding:，不过这个方法在iOS 9.0已被废弃；现在更提倡的是用-stringByAddingPercentEncodingWithAllowedCharacters:方法，这个方法是iOS 7.0后添加的。</p>
+</li>
+</ul>
+<h2 id="4-UIImageView显示gif图片有两种方式"><a href="#4-UIImageView显示gif图片有两种方式" class="headerlink" title="4.UIImageView显示gif图片有两种方式"></a>4.UIImageView显示gif图片有两种方式</h2><ul>
+<li>UIImageView显示gif图片有两种方式。当然前提都是先将gif中的每一帧取出来放到一个个UIImage对象中，将这些对象放到一个数组中，如下代码所示。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);</div><div class="line">size_t count = CGImageSourceGetCount(source);</div><div class="line">    </div><div class="line">NSMutableArray *images = [NSMutableArray array];</div><div class="line">for (size_t i = 0; i &lt; count; i++) &#123;</div><div class="line">   CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);</div><div class="line">   [images addObject:[UIImage imageWithCGImage:image scale:[UIScreen mainScreen] orientation:UIImageOrientationUp]];</div><div class="line">   CGImageRelease(image);</div><div class="line">&#125;</div><div class="line">    </div><div class="line">CFRelease(source)</div></pre></td></tr></table></figure>
+<ol>
+<li><p>一种方式是将这些UIImage对象通过UIImage的类方法+animatedImageWithImages:duration:组合成一个UIImage对象，然后赋值给UIImageView对象的image属性。</p>
+</li>
+<li><p>第二种方式是将UIImage对象的数组赋值给UIImageView对象的animationImages属性，然后调用UIImageView对象的startAnimating方法来启动动画。</p>
+</li>
+</ol>
+<p>当然，两种方式都需要计算duration。</p>
+
       
 
       
