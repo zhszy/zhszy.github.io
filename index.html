@@ -185,6 +185,14 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField &#123;</div><div class="line">    textField.userInteractionEnabled = NO;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line">- (BOOL)textFieldShouldEndEditing:(UITextField *)textField &#123;</div><div class="line">    textField.userInteractionEnabled = YES;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样就OK了。当然这只是我们当前使用的一种处理方式，还有其它的方法，直接google或者stackoverflow吧。</p>
+<h2 id="6-AutoreleasePool"><a href="#6-AutoreleasePool" class="headerlink" title="6. AutoreleasePool"></a>6. AutoreleasePool</h2><p>App启动后，苹果在主线程 RunLoop 里注册了两个 Observer，其回调都是 _wrapRunLoopWithAutoreleasePoolHandler()。</p>
+<ol>
+<li><p>第一个 Observer 监视的事件是 Entry(即将进入Loop)，其回调内会调用 _objc_autoreleasePoolPush() 创建自动释放池。其 order 是-2147483647，优先级最高，保证创建释放池发生在其他所有回调之前。</p>
+</li>
+<li><p>第二个 Observer 监视了两个事件： BeforeWaiting(准备进入休眠) 时调用_objc_autoreleasePoolPop() 和 _objc_autoreleasePoolPush() 释放旧的池并创建新池；Exit(即将退出Loop) 时调用 _objc_autoreleasePoolPop() 来释放自动释放池。这个 Observer 的 order 是 2147483647，优先级最低，保证其释放池子发生在其他所有回调之后。</p>
+</li>
+</ol>
+<p>在主线程执行的代码，通常是写在诸如事件回调、Timer回调内的。这些回调会被 RunLoop 创建好的 AutoreleasePool 环绕着，所以不会出现内存泄漏，开发者也不必显示创建 Pool 了。</p>
 
       
 
@@ -282,6 +290,89 @@ rm -rf 蓝色选中的路径
 
 
   
+    <article id="[layout]-cocoapods" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/12/25/cocoapods/">Private Pods</a>
+    </h1>
+  
+
+        
+        <a href="/2014/12/25/cocoapods/" class="archive-article-date">
+  	<time datetime="2014-12-25T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-12-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。</p>
+<p>1.创建并设置一个私有的Spec Repo。</p>
+<p>创建完成之后在Terminal中执行如下命令:</p>
+<pre><code># pod repo add [REPO_NAME] [SOURCE_URL]
+PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有Spec Repo的话在他有对应Git仓库的权限的前提下执行相同的命令添加这个Spec Repo即可。
+</code></pre><p>如果删除在Terminal中执行如下命令:</p>
+<pre><code># pod repo remove [REPO_NAME] 
+</code></pre><p>2.创建Pod的所需要的项目工程文件。</p>
+<pre><code>$ pod lib create [POD_NAME]
+</code></pre><ul>
+<li>When you’re asked what language you want to use, answer Swift.</li>
+<li>When asked if you’d like to include a demo application, answer Yes.</li>
+<li>When determining whether to create a sample project or not, the CocoaPods team suggests asking yourself “Should this Pod include a screenshot?” If so, then it’s a good idea to include a sample project.</li>
+<li>When asked which testing framework to use, answer None.</li>
+<li>Answer No to the prompt regarding view based testing.。</li>
+</ul>
+<p>3.编辑对应的podspec文件。</p>
+<p>  编辑完podspec文件后，需要验证一下这个文件是否可用，如果有任何WARNING或者ERROR都是不可以的，它就不能被添加到Spec Repo中，不过xcode的WARNING是可以存在的，验证需要执行一下命令</p>
+<p>  创建完成之后在Terminal中执行如下命令:</p>
+<pre><code>$ pod lib lint
+</code></pre><p> 当出现:</p>
+<pre><code>-&gt; [POD_NAME] (version)
+PodTestLibrary passed validation.
+ps:POD_NAME为项目工程名
+</code></pre><p> 时，说明验证通过了。</p>
+<p>4.向私有的Spec Repo中提交podspec。<br>  更新创建版本:</p>
+<pre><code>git tag &apos;1.0.0&apos;
+git push --tags
+PS：当前的版本号必须和.podspec文件中的版本匹配
+</code></pre><p>  提交podspec</p>
+<pre><code>pod repo push [REPO_NAME] [POD_NAME].podspec
+</code></pre><p>5.更新维护podspec。</p>
+<p>更新提交新版本重复实现步骤3和步骤4。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/12/25/cocoapods/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="[layout]-dataLinking" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -357,89 +448,6 @@ rm -rf 蓝色选中的路径
 
 
   
-    <article id="[layout]-cocoapods" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/07/20/cocoapods/">Private Pods</a>
-    </h1>
-  
-
-        
-        <a href="/2014/07/20/cocoapods/" class="archive-article-date">
-  	<time datetime="2014-07-20T06:25:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Cocoapods是非常好用的一个iOS依赖管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库，以及将自己的项目中的公共组件交由它去管理。</p>
-<p>1.创建并设置一个私有的Spec Repo。</p>
-<p>创建完成之后在Terminal中执行如下命令:</p>
-<pre><code># pod repo add [REPO_NAME] [SOURCE_URL]
-PS：REPO_NAME为repo名称， 如果有其他合作人员共同使用这个私有Spec Repo的话在他有对应Git仓库的权限的前提下执行相同的命令添加这个Spec Repo即可。
-</code></pre><p>如果删除在Terminal中执行如下命令:</p>
-<pre><code># pod repo remove [REPO_NAME] 
-</code></pre><p>2.创建Pod的所需要的项目工程文件。</p>
-<pre><code>$ pod lib create [POD_NAME]
-</code></pre><ul>
-<li>When you’re asked what language you want to use, answer Swift.</li>
-<li>When asked if you’d like to include a demo application, answer Yes.</li>
-<li>When determining whether to create a sample project or not, the CocoaPods team suggests asking yourself “Should this Pod include a screenshot?” If so, then it’s a good idea to include a sample project.</li>
-<li>When asked which testing framework to use, answer None.</li>
-<li>Answer No to the prompt regarding view based testing.。</li>
-</ul>
-<p>3.编辑对应的podspec文件。</p>
-<p>  编辑完podspec文件后，需要验证一下这个文件是否可用，如果有任何WARNING或者ERROR都是不可以的，它就不能被添加到Spec Repo中，不过xcode的WARNING是可以存在的，验证需要执行一下命令</p>
-<p>  创建完成之后在Terminal中执行如下命令:</p>
-<pre><code>$ pod lib lint
-</code></pre><p> 当出现:</p>
-<pre><code>-&gt; [POD_NAME] (version)
-PodTestLibrary passed validation.
-ps:POD_NAME为项目工程名
-</code></pre><p> 时，说明验证通过了。</p>
-<p>4.向私有的Spec Repo中提交podspec。<br>  更新创建版本:</p>
-<pre><code>git tag &apos;1.0.0&apos;
-git push --tags
-PS：当前的版本号必须和.podspec文件中的版本匹配
-</code></pre><p>  提交podspec</p>
-<pre><code>pod repo push [REPO_NAME] [POD_NAME].podspec
-</code></pre><p>5.更新维护podspec。</p>
-<p>更新提交新版本重复实现步骤3和步骤4。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2014/07/20/cocoapods/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="[layout]-cocoapodsInstall" class="article article-type-[layout]  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -447,13 +455,13 @@ PS：当前的版本号必须和.podspec文件中的版本匹配
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/07/16/cocoapodsInstall/">CocoaPods安装</a>
+      <a class="article-title" href="/2014/11/17/cocoapodsInstall/">CocoaPods安装</a>
     </h1>
   
 
         
-        <a href="/2014/07/16/cocoapodsInstall/" class="archive-article-date">
-  	<time datetime="2014-07-16T12:15:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-07-16</time>
+        <a href="/2014/11/17/cocoapodsInstall/" class="archive-article-date">
+  	<time datetime="2014-11-17T12:15:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-17</time>
 </a>
         
       </header>
@@ -499,7 +507,7 @@ Operation not permitted - /usr/bin/xcodeproj
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2014/07/16/cocoapodsInstall/">展开全文 >></a>
+          <a class="article-more-a" href="/2014/11/17/cocoapodsInstall/">展开全文 >></a>
         </p>
       
 

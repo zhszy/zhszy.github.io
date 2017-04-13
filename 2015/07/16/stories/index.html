@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://zhszy.github.io/2015/07/16/stories/index.html">
 <meta property="og:site_name" content="zhs的博客">
 <meta property="og:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];  若视图中是多个手势，该方法不适用 2.生成ss">
-<meta property="og:updated_time" content="2017-04-12T06:53:49.000Z">
+<meta property="og:updated_time" content="2017-04-12T09:30:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常用tip">
 <meta name="twitter:description" content="1.多事件同时响应  当界面上有多个继承于UIControl的视图，同时触发，对应的事件也会同时触发，为避免此类问题，在iOS7.0系统中，需将每个继承于UIControl视图的exclusiveTouch属性设置为YES，在iOS8以上的系统，可全局设置[[UIControl appearance] setExclusiveTouch:YES];  若视图中是多个手势，该方法不适用 2.生成ss">
@@ -185,6 +185,14 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField &#123;</div><div class="line">    textField.userInteractionEnabled = NO;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line">- (BOOL)textFieldShouldEndEditing:(UITextField *)textField &#123;</div><div class="line">    textField.userInteractionEnabled = YES;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样就OK了。当然这只是我们当前使用的一种处理方式，还有其它的方法，直接google或者stackoverflow吧。</p>
+<h2 id="6-AutoreleasePool"><a href="#6-AutoreleasePool" class="headerlink" title="6. AutoreleasePool"></a>6. AutoreleasePool</h2><p>App启动后，苹果在主线程 RunLoop 里注册了两个 Observer，其回调都是 _wrapRunLoopWithAutoreleasePoolHandler()。</p>
+<ol>
+<li><p>第一个 Observer 监视的事件是 Entry(即将进入Loop)，其回调内会调用 _objc_autoreleasePoolPush() 创建自动释放池。其 order 是-2147483647，优先级最高，保证创建释放池发生在其他所有回调之前。</p>
+</li>
+<li><p>第二个 Observer 监视了两个事件： BeforeWaiting(准备进入休眠) 时调用_objc_autoreleasePoolPop() 和 _objc_autoreleasePoolPush() 释放旧的池并创建新池；Exit(即将退出Loop) 时调用 _objc_autoreleasePoolPop() 来释放自动释放池。这个 Observer 的 order 是 2147483647，优先级最低，保证其释放池子发生在其他所有回调之后。</p>
+</li>
+</ol>
+<p>在主线程执行的代码，通常是写在诸如事件回调、Timer回调内的。这些回调会被 RunLoop 创建好的 AutoreleasePool 环绕着，所以不会出现内存泄漏，开发者也不必显示创建 Pool 了。</p>
 
       
 
